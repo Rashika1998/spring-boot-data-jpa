@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ class StudentRepositoryTest {
 
 
     @Test
-    @DisplayName("save_student_function_test")
+    @DisplayName("Save Student")
     @Disabled
     public void saveStudent(){
         Student student = Student.builder()
@@ -44,9 +45,9 @@ class StudentRepositoryTest {
 
 
         Student student = Student.builder()
-                .emailId("rashika@gmail.com")
-                .firstName("Rashika")
-                .lastName("Madhushanka")
+                .emailId("rashika1@gmail.com")
+                .firstName("Rashika1")
+                .lastName("Madhushanka1")
                 .guardian(guardian)
                 .build();
 
@@ -108,6 +109,20 @@ class StudentRepositoryTest {
         Student student = studentRepository.getStudentByEmailAddressNative("rashika@gmail.com");
         System.out.println(student);
     }
+
+    @Test
+    @DisplayName("Get student by email native named query")
+    public void getStudentByEmailNativeNamedQuery(){
+        Student student = studentRepository.getStudentByEmailAddressNativeNamedParam("rashika@gmail.com");
+        System.out.println(student);
+    }
+
+    @Test
+    @DisplayName("Update first name by email native query")
+    public void updateStudentFirstNameByEmailId(){
+        studentRepository.updateStudentFirstNameByEmailId("Rashika new new new", "rashika@gmail.com");
+    }
+
 
 
 
