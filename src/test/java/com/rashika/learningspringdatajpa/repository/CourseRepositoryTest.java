@@ -1,7 +1,5 @@
 package com.rashika.learningspringdatajpa.repository;
-import com.rashika.learningspringdatajpa.entity.Course;
-import com.rashika.learningspringdatajpa.entity.CourseMaterial;
-import com.rashika.learningspringdatajpa.entity.Teacher;
+import com.rashika.learningspringdatajpa.entity.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
@@ -83,6 +81,42 @@ class CourseRepositoryTest {
         System.out.println("Courses: " + courses);
 
     }
+
+    @Test
+    public void saveCourseWithStudentAndTeacher(){
+
+        Guardian guardian = Guardian.builder()
+                .name("P")
+                .email("p@gmail.com")
+                .mobile("+94710000000")
+                .build();
+
+        Teacher teacher = Teacher.builder()
+                .firstName("Rash")
+                .lastName("Madhu")
+                .build();
+
+        Student student = Student.builder()
+                .firstName("R")
+                .lastName("M")
+                .emailId("rm@gmail.com")
+                .guardian(guardian)
+                .build();
+
+        Course course = Course.builder()
+                .title("PAF")
+                .credit(80)
+                .teacher(teacher)
+                .build();
+
+        course.addStudent(student);
+        courseRepository.save(course);
+
+
+    }
+
+
+
 
 
 
